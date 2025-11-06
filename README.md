@@ -6,7 +6,7 @@ This project implements a complete pipeline for detecting AI-generated paper rev
 
 This project addresses the growing concern of AI-generated academic reviews by:
 
-1. **Collecting real reviews** from ICLR (International Conference on Learning Representations)
+1. **Collecting real reviews** from some conference (e.g. ICLR)
 2. **Generating synthetic reviews** using state-of-the-art LLMs (GPT-4o, DeepSeek Reasoner)
 3. **Training a classifier** using Longformer with LoRA fine-tuning to detect AI-generated content
 4. **Analyzing trends** in AI-generated reviews across multiple years (2021-2023)
