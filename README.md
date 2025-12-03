@@ -44,6 +44,28 @@ This project addresses the growing concern of AI-generated academic reviews by:
 
 ## Results
 
+### Model Performance on Training Set (ICLR 2021)
+
+The fine-tuned Longformer+LoRA model achieves excellent performance on the 2021 training set:
+
+**Confusion Matrix:**
+
+|                    | Predicted Real | Predicted AI |
+|--------------------|----------------|--------------|
+| **Actual Real**    | 160            | 0            |
+| **Actual AI**      | 0              | 160          |
+
+**Classification Report:**
+
+| Class              | Precision | Recall | F1-Score | Support |
+|--------------------|-----------|--------|----------|---------|
+| Real Review (0)    | 1.00      | 1.00   | 1.00     | 160     |
+| AI Generated (1)   | 1.00      | 1.00   | 1.00     | 160     |
+| **Accuracy**       |           |        | 1.00     | 320     |
+| **Macro Avg**      | 1.00      | 1.00   | 1.00     | 320     |
+| **Weighted Avg**   | 1.00      | 1.00   | 1.00     | 320     |
+
+
 ### AI Detection Trends (2022-2025)
 
 Our fine-tuned classifier detected a significant increasing trend in potential AI-generated reviews across ICLR conferences from 2022 to 2025:
