@@ -92,6 +92,18 @@ The fine-tuned Longformer+LoRA model achieves excellent performance on the 2021 
 
 We trained a separate classifier specifically for Nature Communications (NC) peer reviews using the same methodology. The model was trained on NC 2021 reviews and tested on reviews from 2022-2025.
 
+### Model Performance on Training Set (NC 2021)
+
+The fine-tuned Longformer+LoRA model achieves excellent performance on the NC 2021 training set:
+
+**Confusion Matrix:**
+
+|                    | Predicted Real | Predicted AI |
+|--------------------|----------------|--------------|
+| **Actual Real**    | 120            | 0            |
+| **Actual AI**      | 0              | 120          |
+
+
 ### AI Detection Trends by Year (NC 2022-2025)
 
 ![Percentage of NC Reviews Classified as AI-Generated](images/nc_ai_percentage_trend.png)
