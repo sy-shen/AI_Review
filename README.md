@@ -1,16 +1,16 @@
-# AI Review Detection: ICLR Paper Review Analysis
+# AI Review Detection: Academic Paper Review Analysis
 
-This project implements a complete pipeline for detecting AI-generated paper reviews using fine-tuned language models. The system downloads ICLR conference data, generates synthetic reviews using AI models, trains a classifier to distinguish between real and AI-generated reviews, and performs inference on real data.
+This project implements a complete pipeline for detecting AI-generated paper reviews using fine-tuned language models. The system downloads conference/journal data, generates synthetic reviews using AI models, trains a classifier to distinguish between real and AI-generated reviews, and performs inference on real data.
 
 ## Overview
 
 This project addresses the growing concern of AI-generated academic reviews by:
 
-1. **Collecting real reviews** from ICLR (International Conference on Learning Representations)
+1. **Collecting real reviews** from ICLR (International Conference on Learning Representations) and Nature Communications
 2. **Generating synthetic reviews** using LLMs (GPT-4o, DeepSeek Reasoner)
-3. **Training a classifier** using Longformer with LoRA fine-tuning to detect AI-generated content
-   - **Training Set**: Uses ICLR 2021 reviews (both real human-written reviews and AI-generated synthetic reviews)
-   - **Test Set**: Performs inference on real reviews from ICLR 2022-2025 to detect potential AI-generated content and analyze trends across multiple years
+3. **Training separate classifiers** using Longformer with LoRA fine-tuning to detect AI-generated content
+   - **ICLR Model**: Trained on ICLR 2021 reviews, tested on ICLR 2022-2025
+   - **Nature Communications Model**: Trained on NC 2021 reviews, tested on NC 2022-2025
 
 ## Pipeline Workflow
 
@@ -42,7 +42,9 @@ This project addresses the growing concern of AI-generated academic reviews by:
 └─────────────────────┘
 ```
 
-## Results
+## ICLR Results
+
+We trained a classifier for ICLR peer reviews. The model was trained on ICLR 2021 reviews and tested on reviews from 2022-2025.
 
 ### Model Performance on Training Set (ICLR 2021)
 
@@ -65,14 +67,11 @@ The fine-tuned Longformer+LoRA model achieves excellent performance on the 2021 
 | **Macro Avg**      | 1.00      | 1.00   | 1.00     | 320     |
 | **Weighted Avg**   | 1.00      | 1.00   | 1.00     | 320     |
 
-
-### AI Detection Trends (2022-2025)
-
-Our fine-tuned classifier detected a significant increasing trend in potential AI-generated reviews across ICLR conferences from 2022 to 2025:
+### AI Detection Trends (ICLR 2022-2025)
 
 ![Percentage of Real Reviews Classified as AI-Generated](images/ai_percentage_trend.png)
 
-### Summary Statistics
+### Summary Statistics (ICLR)
 
 | Year | Total Reviews | AI-Detected | Percentage |
 |------|--------------|-------------|------------|
@@ -81,11 +80,41 @@ Our fine-tuned classifier detected a significant increasing trend in potential A
 | 2024 | 1,818        | 133         | 7.32%      |
 | 2025 | 1,961        | 392         | 19.99%     |
 
+### Discussion (ICLR)
 
-## Discussion
 - Each year, we randomly sampled reviews from approximately 500 papers, resulting in around 2,000 review entries annually.
 - In 2022 and 2023, the classifier detected virtually no AI-generated reviews. This is likely because ChatGPT and similar models were only released after the 2023 ICLR review process, so AI-generated content was not present in the earlier years; this further demonstrates the robustness and specificity of our model.
 - Starting from ICLR 2024 and continuing into 2025, we observe a marked increase in the proportion of reviews classified as AI-generated, suggesting a rising trend in the potential usage of AI tools in review writing.
+
+---
+
+## Nature Communications Results
+
+We trained a separate classifier specifically for Nature Communications (NC) peer reviews using the same methodology. The model was trained on NC 2021 reviews and tested on reviews from 2022-2025.
+
+### AI Detection Trends by Year (NC 2022-2025)
+
+![Percentage of NC Reviews Classified as AI-Generated](images/nc_ai_percentage_trend.png)
+
+### Summary Statistics (Nature Communications)
+
+| Year | AI-Detected Percentage |
+|------|------------------------|
+| 2022 | 0.00%                  |
+| 2023 | 0.35%                  |
+| 2024 | 1.74%                  |
+| 2025 | 12.32%                 |
+
+### Quarterly Trend Analysis
+
+![AI-Generated Reviews Trend by Quarter (NC)](images/nc_ai_percentage_trend_qt.png)
+
+### Discussion (Nature Communications)
+
+- In 2022 and 2023, the classifier detected virtually no AI-generated reviews, consistent with the pre-ChatGPT era and validating our model's specificity.
+- Starting from late 2024 and continuing into 2025, we observe a marked increase in the proportion of reviews classified as AI-generated.
+- The quarterly trend analysis shows an upward trajectory with a positive slope (0.93 per quarter), confirming the rising trend.
+- The pattern observed in Nature Communications mirrors that of ICLR, indicating this may be a broader trend across academic publishing.
 
 
 
